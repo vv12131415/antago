@@ -1,0 +1,18 @@
+AppBundle\Entity\Product:
+  type: entity
+  table: product
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: text
+      length: 255
+      nullable: false
+      column: name
+  manyToMany:
+    categories:
+      targetEntity: AppBundle\Entity\Category
+      mappedBy: products
