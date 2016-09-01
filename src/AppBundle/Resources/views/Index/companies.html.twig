@@ -3,10 +3,10 @@
 {% block body %}
     <div class="col-xs-12">
         <h2 class="sub-header">Homepage </h2>
-        <p type="button" class="btn btn-primary btn-sm">Product name</p>
+        <a type="button" class="btn btn-primary btn-sm">Product name</a>
         <hr/>
         {% for company in pagination %}
-            <a type="button" class="btn btn-default btn-sm">{{ company.name }}</a>
+            <a type="button" class="btn btn-default btn-sm" href="companies/{{ company.name }}">{{ company.name }}</a>
             <br>
         {% endfor %}
         <div class="text-center">

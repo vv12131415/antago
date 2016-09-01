@@ -59,18 +59,36 @@ class IndexController extends Controller
      */
     public function companyAction(Request $request, $company_name)
     {
+        $productId = $request->query->get('product');
+
         $em = $this->getDoctrine()->getManager();
         $companies = $em->getRepository('AppBundle:Company')->findAll();
 
-        $dql = "SELECT p FROM AppBundle:Product p JOIN p.companies c WHERE c.name = '$company_name'";
-        $query = $em->createQuery($dql);
+        if (null == $productId){
 
-        $paginator = $this->get('knp_paginator');
-        $pagination = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            5
-        );
+
+            $dql = "SELECT p FROM AppBundle:Product p JOIN p.companies c WHERE c.name = '$company_name'";
+            $query = $em->createQuery($dql);
+
+            $paginator = $this->get('knp_paginator');
+            $pagination = $paginator->paginate(
+                $query,
+                $request->query->getInt('page', 1),
+                5
+            );
+        } else {
+            $dql = "SELECT p FROM AppBundle:Product p JOIN p.companies c WHERE c.name = '$company_name' AND p.id = '$productId'";
+            $query = $em->createQuery($dql);
+
+            $paginator = $this->get('knp_paginator');
+            $pagination = $paginator->paginate(
+                $query,
+                $request->query->getInt('page', 1),
+                5
+            );
+        }
+
+
 
         return $this->render('AppBundle:Index:company.html.twig', [
             'companies' => $companies,
@@ -78,4 +96,5 @@ class IndexController extends Controller
             'pagination' => $pagination,
         ]);
     }
+    
 }
