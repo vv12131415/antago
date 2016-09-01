@@ -1,19 +1,47 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: ubuntu
+ * Date: 8/15/16
+ * Time: 6:42 PM
+ */
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="product")
+ */
 class Product
 {
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     protected $id;
 
     /**
+     *
      * @var string
+     *
+     * @ORM\Column(name="name", type="text", length=255, nullable=false)
      */
     protected $name;
 
-    protected $categories;
+    /**
+     * @ORM\ManyToMany(targetEntity="Company", mappedBy="products")
+     * @ORM\JoinTable(name="product_company",
+     * joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     * inverseJoinColumns={@ORM\JoinColumn(name="company_id", referencedColumnName="id")}
+     * )
+     */
+    protected $companies;
 
     /**
      * @return mixed
@@ -50,16 +78,17 @@ class Product
     /**
      * @return ArrayCollection
      */
-    public function getCategories()
+    public function getCompanies()
     {
-        return $this->categories;
+        return $this->companies;
     }
 
     /**
-     * @param \AppBundle\Entity\Category $categories
+     * @param \AppBundle\Entity\Company $companies
      */
-    public function addCategories(\AppBundle\Entity\Category $categories)
+    public function addCompanies(\AppBundle\Entity\Company $companies)
     {
-        $this->categories[] = $categories;
+        $this->companies[] = $companies;
     }
+
 }

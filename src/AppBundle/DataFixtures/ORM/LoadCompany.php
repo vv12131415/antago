@@ -2,14 +2,14 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Category;
+use AppBundle\Entity\Company;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadCategory implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadCompany implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     /**
      * @var ContainerInterface
@@ -21,15 +21,15 @@ class LoadCategory implements FixtureInterface, ContainerAwareInterface, Ordered
      */
     public function load(ObjectManager $manager)
     {
-        $category1 = new Category();
-        $category1->setName('Phones');
+        $company1 = new Company();
+        $company1->setName('Apple');
 
-        $manager->persist($category1);
+        $manager->persist($company1);
 
-        $category = new Category();
-        $category->setName('TVs');
+        $company = new Company();
+        $company->setName('Samsung');
 
-        $manager->persist($category);
+        $manager->persist($company);
 
         $manager->flush();
     }

@@ -14,7 +14,7 @@ class IndexController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $categories = $em->getRepository('AppBundle:Category')->findAll();
+        $companies = $em->getRepository('AppBundle:Company')->findAll();
 
         $dql = 'SELECT p FROM AppBundle:Product p';
         $query = $em->createQuery($dql);
@@ -27,20 +27,19 @@ class IndexController extends Controller
         );
 
         return $this->render('AppBundle:Index:index.html.twig', [
-            'categories' => $categories,
+            'companies' => $companies,
             'pagination' => $pagination,
         ]);
     }
 
     /**
-     * @Route("/{category_name}", name="showCategory")
+     * @Route("/companies", name="showCompanies")
      */
-    public function categoryAction(Request $request, $category_name)
+    public function companiesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $categories = $em->getRepository('AppBundle:Category')->findAll();
 
-        $dql = "SELECT p FROM AppBundle:Product p JOIN p.categories c WHERE c.name = '$category_name'";
+        $dql = 'SELECT c FROM AppBundle:Company c';
         $query = $em->createQuery($dql);
 
         $paginator = $this->get('knp_paginator');
@@ -50,9 +49,32 @@ class IndexController extends Controller
             5
         );
 
-        return $this->render('AppBundle:Index:category.html.twig', [
-            'categories' => $categories,
-            'category_name' => $category_name,
+        return $this->render('AppBundle:Index:companies.html.twig', [
+            'pagination' => $pagination,
+        ]);
+    }
+
+    /**
+     * @Route("/companies/{company_name}", name="showCompany")
+     */
+    public function companyAction(Request $request, $company_name)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $companies = $em->getRepository('AppBundle:Company')->findAll();
+
+        $dql = "SELECT p FROM AppBundle:Product p JOIN p.companies c WHERE c.name = '$company_name'";
+        $query = $em->createQuery($dql);
+
+        $paginator = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            5
+        );
+
+        return $this->render('AppBundle:Index:company.html.twig', [
+            'companies' => $companies,
+            'company_name' => $company_name,
             'pagination' => $pagination,
         ]);
     }

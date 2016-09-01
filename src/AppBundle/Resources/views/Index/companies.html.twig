@@ -1,0 +1,18 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <div class="col-xs-12">
+        <h2 class="sub-header">Homepage </h2>
+        <p type="button" class="btn btn-primary btn-sm">Product name</p>
+        <hr/>
+        {% for company in pagination %}
+            <a type="button" class="btn btn-default btn-sm">{{ company.name }}</a>
+            <br>
+        {% endfor %}
+        <div class="text-center">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -8,7 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadProductCompany implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     /**
      * @var ContainerInterface
@@ -20,7 +20,7 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
      */
     public function load(ObjectManager $manager)
     {
-        $phones = [
+        $apple = [
             'iPhone 6',
             'Samsung Galaxy S6',
             'Xiaomi RedMi 3',
@@ -30,7 +30,7 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
             'LG Optimus G',
         ];
 
-        $tvs = [
+        $samsung = [
             'Samsung 4K 32 inch',
             'Sony 4K 32 inch',
             'LG 4K 32 inch',
@@ -40,23 +40,23 @@ class LoadProductCategory implements FixtureInterface, ContainerAwareInterface, 
             'Samsung 4K 4- inch',
         ];
 
-        $categories = [
-            'Phones',
-            'TVs',
+        $companies = [
+            'Apple',
+            'Samsung',
         ];
 
-        for ($i = 0; $i < count($phones); $i++) {
-            $category = $manager->getRepository('AppBundle:Category')->findOneByName($categories[0]);
-            $product = $manager->getRepository('AppBundle:Product')->findOneByName($phones[$i]);
+        for ($i = 0; $i < count($apple); $i++) {
+            $company = $manager->getRepository('AppBundle:Company')->findOneByName($companies[0]);
+            $product = $manager->getRepository('AppBundle:Product')->findOneByName($apple[$i]);
 
-            $category->addProducts($product);
+            $company->addProducts($product);
         }
 
-        for ($i = 0; $i < count($tvs); $i++) {
-            $category = $manager->getRepository('AppBundle:Category')->findOneByName($categories[1]);
-            $product = $manager->getRepository('AppBundle:Product')->findOneByName($tvs[$i]);
+        for ($i = 0; $i < count($samsung); $i++) {
+            $company = $manager->getRepository('AppBundle:Company')->findOneByName($companies[1]);
+            $product = $manager->getRepository('AppBundle:Product')->findOneByName($samsung[$i]);
 
-            $category->addProducts($product);
+            $company->addProducts($product);
         }
 
         $manager->flush();
