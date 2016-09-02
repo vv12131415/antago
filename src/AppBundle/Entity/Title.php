@@ -5,7 +5,7 @@
  * Date: 4/28/16
  * Time: 1:33 PM
  */
-namespace ApiBundle\Entity;
+namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity

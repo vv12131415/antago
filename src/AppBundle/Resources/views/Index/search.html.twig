@@ -2,13 +2,10 @@
 
 {% block body %}
     <div class="col-xs-12">
-        <h2 class="sub-header">Admin page </h2>
-        <a type="button" class="btn btn-primary btn-sm">Url</a>
-        <form action="/admin/search" method="post">
-            <input class="form-control" type="text" name="string" required="required">
-            <br>
-            <button type="submit" class="btn btn-primary send">Save</button>
-        </form>
+        {#<h2 class="sub-header">{{ homepage }}</h2>
+        <h2 class="sub-header">{{ companyListTitle }}</h2>#}
+        <h2 class="sub-header">{{ companyTitle }}</h2>
+        <h2 class="sub-header">{% if productTitle is defined  %}{{ productTitle }}{% endif %}</h2>
     </div>
 
     {#<form class="form-group" action="{{ path('login') }}" method="post">

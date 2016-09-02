@@ -2,7 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use ApiBundle\Entity\Title;
+use AppBundle\Entity\Title;
+use AppBundle\Form\TitleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -119,16 +120,59 @@ class IndexController extends Controller
     public function SearchAction(Request $request)
     {
         $response = new JsonResponse();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $homepage =
+
         $string = $request->request->get('string');
 
-        $title = new Title();
+        $stringArr = parse_url($string);
 
-        //$test = json_encode($test);
-        //var_dump($test);die();
-        //var_dump($request->request->get('title')); die();
-        //$request->request->get('title');
+        $path = $stringArr['path'];
 
-        return $response;
+        $path = explode('/', $path);
+
+        $companyName = $path[2];
+
+        $company = $em->getRepository('AppBundle:Company')->findOneByName($companyName);
+
+        if(!$company){
+            return $this->render('AppBundle:Index:search.html.twig', [
+                'companyTitle' => $companyTitle,
+                'productTitle' => $productTitle,
+            ]);
+        }
+        var_dump($company);die();
+
+        $companyTitle = $company->getTitle();
+
+
+
+        if(array_key_exists('query', $stringArr)) {
+            $query = $stringArr['query'];
+
+            $query = explode('=', $query);
+
+            $productUrl = $query[1];
+
+            $product = $em->getRepository('AppBundle:Product')->find($productUrl);
+
+            $productTitle = $product->getTitle();
+
+            return $this->render('AppBundle:Index:search.html.twig', [
+                'companyTitle' => $companyTitle,
+                'productTitle' => $productTitle,
+            ]);
+        }
+        //TODO: don't forget to persist and push
+
+        //var_dump($product);die();
+
+
+        return $this->render('AppBundle:Index:search.html.twig', [
+            'companyTitle' => $companyTitle,
+        ]);
     }
 
     /**

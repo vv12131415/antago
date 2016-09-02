@@ -35,7 +35,7 @@ class TitleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'        => 'ApiBundle\Entity\Title',
+            'data_class'        => 'AppBundle\Entity\Title',
             'csrf_protection'   => false,
             'allow_extra_fields' => true
         ]);

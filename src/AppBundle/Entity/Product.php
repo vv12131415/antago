@@ -44,6 +44,13 @@ class Product
     protected $companies;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    protected $title;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -89,6 +96,22 @@ class Product
     public function addCompanies(\AppBundle\Entity\Company $companies)
     {
         $this->companies[] = $companies;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
     }
 
 }

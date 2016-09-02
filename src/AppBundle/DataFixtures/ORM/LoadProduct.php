@@ -41,6 +41,7 @@ class LoadProduct implements FixtureInterface, ContainerAwareInterface, OrderedF
         for ($i = 0; $i < count($products); ++$i) {
             $product = new Product();
             $product->setName($products[$i]);
+            $product->setTitle('Test title for '.$products[$i]);
             $manager->persist($product);
         }
 

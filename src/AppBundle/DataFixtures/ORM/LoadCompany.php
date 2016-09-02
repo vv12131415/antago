@@ -23,11 +23,13 @@ class LoadCompany implements FixtureInterface, ContainerAwareInterface, OrderedF
     {
         $company1 = new Company();
         $company1->setName('Apple');
+        $company1->setTitle('Test title for Apple');
 
         $manager->persist($company1);
 
         $company = new Company();
         $company->setName('Samsung');
+        $company->setTitle('Test title for Samsung');
 
         $manager->persist($company);
 

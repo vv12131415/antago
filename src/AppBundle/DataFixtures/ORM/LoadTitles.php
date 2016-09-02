@@ -1,7 +1,7 @@
 <?php
 namespace AppBundle\DataFixtures\ORM;
 
-use ApiBundle\Entity\Title;
+use AppBundle\Entity\Title;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
 
-class LoadPosts implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
+class LoadTitles implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     /**
      * @var ContainerInterface
@@ -22,9 +22,9 @@ class LoadPosts implements FixtureInterface, ContainerAwareInterface, OrderedFix
     public function load(ObjectManager $manager)
     {
         for ($i = 0; $i < 20; $i++) {
-            $post = new Title();
-            $post->setString('Test title');
-            $manager->persist($post);
+            $title = new Title();
+            $title->setString('Test title');
+            $manager->persist($title);
         }
 
         $manager->flush();

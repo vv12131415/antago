@@ -41,6 +41,12 @@ class Company
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", inversedBy="companies")
      */
     protected $products;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    protected $title;
 
     public function __construct()
     {
@@ -93,6 +99,22 @@ class Company
     public function addProducts(\AppBundle\Entity\Product $products)
     {
         $this->products[] = $products;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
     }
 
 
