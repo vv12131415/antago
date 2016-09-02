@@ -1,0 +1,39 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <div class="col-xs-12">
+        <h2 class="sub-header">Admin page </h2>
+        <a type="button" class="btn btn-primary btn-sm">Url</a>
+        <input class="form-control" type="text" id="post_title" name="post[title]" required="required">
+        <br>
+        <button type="submit" class="btn btn-primary send" href="javascript:;">Save</button>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(".send").click(function (event) {
+            var string = $(".send").parent().find('input').val();
+            $.ajax({
+                url: "/admin/search",
+                method: "POST",
+                data:{
+                    'title': string
+                },
+                success: function () {
+                    $("tbody td[name=id]").each(function(index, element) {
+                        if (parseInt($(this).text()) === parseInt(postId)) {
+                            $(this).parent().find($("td[name=title]")).text(title);
+                            $(this).parent().find($("td[name=description]")).text(description);
+                        }
+                    });
+                },
+                error: function (response) {
+                    console.log(response);
+                }
+            });
+        });
+    </script>
+{% endblock %}

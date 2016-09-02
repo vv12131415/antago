@@ -2,9 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use ApiBundle\Entity\Title;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class IndexController extends Controller
 {
@@ -96,5 +99,44 @@ class IndexController extends Controller
             'pagination' => $pagination,
         ]);
     }
-    
+
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function adminAction(Request $request)
+    {
+
+        return $this->render('AppBundle:Index:admin.html.twig', [
+
+        ]);
+    }
+
+    /**
+     * @Route("/admin/search", name="adminSearch")
+     * @Method({"POST"})
+     */
+    public function SearchAction(Request $request)
+    {
+        $response = new JsonResponse();
+        $string = $request->request->get('string');
+
+        $title = new Title();
+
+        //$test = json_encode($test);
+        //var_dump($test);die();
+        //var_dump($request->request->get('title')); die();
+        //$request->request->get('title');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/admin/change", name="adminChange")
+     * @Method({"GET", "POST"})
+     */
+    public function ChangeAction(Request $request)
+    {
+        $request->request->get('title');
+    }
 }
