@@ -21,23 +21,23 @@ class LoadProductCompany implements FixtureInterface, ContainerAwareInterface, O
     public function load(ObjectManager $manager)
     {
         $apple = [
-            'iPhone 6',
-            'Samsung Galaxy S6',
-            'Xiaomi RedMi 3',
-            'iPhone 6s',
-            'Nokia Lumia',
-            'HTC One M8',
-            'LG Optimus G',
+            'MacBook',
+            'MacBook Air',
+            'MacBook Pro',
+            'iMac',
+            'Mac Pro',
+            'Mac mini',
+            'iPad Pro',
         ];
 
         $samsung = [
-            'Samsung 4K 32 inch',
-            'Sony 4K 32 inch',
-            'LG 4K 32 inch',
-            'Panasonic 4K 32 inch',
-            'Xiaomi 4K 32 inch',
-            'Sony 4K 40 inch',
-            'Samsung 4K 4- inch',
+            'Galaxy Note7',
+            'Galaxy S7',
+            'Galaxy View 18.4',
+            'Galaxy Tab S2',
+            'TV KS-series',
+            'TV JS-series',
+            'TV JU-series',
         ];
 
         $companies = [

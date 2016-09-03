@@ -22,27 +22,26 @@ class LoadProduct implements FixtureInterface, ContainerAwareInterface, OrderedF
     public function load(ObjectManager $manager)
     {
         $products = [
-            'iPhone 6',
-            'Samsung Galaxy S6',
-            'Xiaomi RedMi 3',
-            'iPhone 6s',
-            'Nokia Lumia',
-            'HTC One M8',
-            'LG Optimus G',
-
-            'Samsung 4K 32 inch',
-            'Sony 4K 32 inch',
-            'LG 4K 32 inch',
-            'Panasonic 4K 32 inch',
-            'Xiaomi 4K 32 inch',
-            'Sony 4K 40 inch',
-            'Samsung 4K 4- inch',
+            'MacBook',
+            'MacBook Air',
+            'MacBook Pro',
+            'iMac',
+            'Mac Pro',
+            'Mac mini',
+            'iPad Pro',
+            'Galaxy Note7',
+            'Galaxy S7',
+            'Galaxy View 18.4',
+            'Galaxy Tab S2',
+            'TV KS-series',
+            'TV JS-series',
+            'TV JU-series',
         ];
 
         for ($i = 0; $i < count($products); ++$i) {
             $product = new Product();
             $product->setName($products[$i]);
-            $product->setTitle('Test title for '.$products[$i]);
+            $product->setTitle('Page of '.$products[$i]);
             $manager->persist($product);
         }
 
