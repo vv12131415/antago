@@ -21,9 +21,14 @@ class LoadTitles implements FixtureInterface, ContainerAwareInterface, OrderedFi
      */
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < 20; $i++) {
+        $pages = [
+            'homepage',
+            'companiesList'
+        ];
+
+        for ($i = 0; $i < count($pages); $i++) {
             $title = new Title();
-            $title->setString('Test title');
+            $title->setName($pages[$i]);
             $manager->persist($title);
         }
 

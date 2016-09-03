@@ -92,7 +92,7 @@ class IndexController extends Controller
             );
         }
 
-
+        //var_dump($pagination[1]);die();
 
         return $this->render('AppBundle:Index:company.html.twig', [
             'companies' => $companies,
@@ -107,10 +107,7 @@ class IndexController extends Controller
      */
     public function adminAction(Request $request)
     {
-
-        return $this->render('AppBundle:Index:admin.html.twig', [
-
-        ]);
+        return $this->render('AppBundle:Index:admin.html.twig', []);
     }
 
     /**
@@ -119,59 +116,87 @@ class IndexController extends Controller
      */
     public function SearchAction(Request $request)
     {
-        $response = new JsonResponse();
-
+        //TODO:check user input
         $em = $this->getDoctrine()->getManager();
 
-        $homepage =
+        $homepage = $em->getRepository('AppBundle:Title')->findOneByName('homepage');
+        $homepageTitle = $homepage->getTitle();
+
+        $companiesList = $em->getRepository('AppBundle:Title')->findOneByName('companiesList');
+        $companiesListTitle = $companiesList->getTitle();
 
         $string = $request->request->get('string');
-
         $stringArr = parse_url($string);
 
-        $path = $stringArr['path'];
+        if(!array_key_exists('path', $stringArr)){
+            return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
+        }
 
+        $path = $stringArr['path'];
         $path = explode('/', $path);
 
-        $companyName = $path[2];
+        foreach ($path as $key => $value) {
+            if (empty($value)) {
+                unset($path[$key]);
+            }}
 
+        if(empty($path)){
+            return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
+        }
+        if('companies' == $path[1] && empty($path[2])){
+            return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
+        }
+
+        $companyName = $path[2];
         $company = $em->getRepository('AppBundle:Company')->findOneByName($companyName);
 
         if(!$company){
-            return $this->render('AppBundle:Index:search.html.twig', [
-                'companyTitle' => $companyTitle,
-                'productTitle' => $productTitle,
-            ]);
+            return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
         }
-        var_dump($company);die();
 
         $companyTitle = $company->getTitle();
 
-
-
-        if(array_key_exists('query', $stringArr)) {
-            $query = $stringArr['query'];
-
-            $query = explode('=', $query);
-
-            $productUrl = $query[1];
-
-            $product = $em->getRepository('AppBundle:Product')->find($productUrl);
-
-            $productTitle = $product->getTitle();
-
+        if(!array_key_exists('query', $stringArr)) {
             return $this->render('AppBundle:Index:search.html.twig', [
+                'homepageTitle' => $homepageTitle,
+                'companyListTitle' => $companiesListTitle,
+                'companyName' => $companyName,
                 'companyTitle' => $companyTitle,
-                'productTitle' => $productTitle,
             ]);
         }
         //TODO: don't forget to persist and push
 
-        //var_dump($product);die();
+        $query = $stringArr['query'];
+        $query = explode('=', $query);
 
+        $productId = $query[1];
+        $product = $em->getRepository('AppBundle:Product')->find($productId);
+        $productName = $product->getName();
+
+        if(!$product){
+            return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
+        }
+
+        $productTitle = $product->getTitle();
 
         return $this->render('AppBundle:Index:search.html.twig', [
+            'homepageTitle' => $homepageTitle,
+            'companyListTitle' => $companiesListTitle,
+            'companyName' => $companyName,
             'companyTitle' => $companyTitle,
+            'productName' => $productName,
+            'productTitle' => $productTitle,
+        ]);
+
+
+
+    }
+
+    protected function somethingWentWrong($homepageTitle, $companiesListTitle)
+    {
+        return $this->render('AppBundle:Index:search.html.twig', [
+            'homepageTitle' => $homepageTitle,
+            'companyListTitle' => $companiesListTitle,
         ]);
     }
 
@@ -179,8 +204,39 @@ class IndexController extends Controller
      * @Route("/admin/change", name="adminChange")
      * @Method({"GET", "POST"})
      */
-    public function ChangeAction(Request $request)
+    public function changeAction(Request $request)
     {
-        $request->request->get('title');
+        $em = $this->getDoctrine()->getManager();
+        
+        $homepageTitle = $request->request->get('homepageTitle');
+        $homepage = $em->getRepository('AppBundle:Title')->findOneByName('homepage');
+        $homepage->setTitle($homepageTitle);
+        $em->persist($homepage);
+        
+        $companyListTitle = $request->request->get('companyListTitle');
+        $companyList = $em->getRepository('AppBundle:Title')->findOneByName('companiesList');
+        $companyList->setTitle($companyListTitle);
+        $em->persist($companyList);
+
+        if($request->request->get('companyTitle')){
+            $companyTitle = $request->request->get('companyTitle');
+            $companyName = $request->request->get('companyName');
+            $company = $em->getRepository('AppBundle:Company')->findOneByName($companyName);
+            $company->setTitle($companyTitle);
+            $em->persist($company);
+        }
+
+        if($request->request->get('productTitle')){
+            $productTitle = $request->request->get('productTitle');
+            $productName = $request->request->get('productName');
+            $product = $em->getRepository('AppBundle:Product')->findOneByName($productName);
+            $product->setTitle($productTitle);
+            $em->persist($product);
+        }
+
+
+        $em->flush();
+
+        return $this->redirectToRoute('admin');
     }
 }

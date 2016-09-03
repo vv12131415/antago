@@ -13,7 +13,8 @@
         <p type="button" class="btn btn-primary btn-sm">Product name</p>
         <hr/>
         {% for product in pagination %}
-            <p type="button" class="btn btn-default btn-sm">{{ product.name }}</p>
+            <a type="button" class="btn btn-default btn-sm"
+               href="{{ path('showCompany', {'company_name': product.companies[0].name, 'product': product.id}) }}">{{ product.name }}</a>
             <br>
         {% endfor %}
         <div class="text-center">

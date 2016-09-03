@@ -22,9 +22,15 @@ class Title
     protected $id;
     /**
      *
-     * @ORM\Column(name="string", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
      */
-    protected $string;
+    protected $name;
+
+    /**
+     *
+     * @ORM\Column(name="title", type="string", length=255)
+     */
+    protected $title = 'Welcome!';
 
     /**
      * @return mixed
@@ -44,17 +50,32 @@ class Title
     /**
      * @return mixed
      */
-    public function getString()
+    public function getName()
     {
-        return $this->string;
+        return $this->name;
     }
 
     /**
-     * @param mixed $string
+     * @param mixed $name
      */
-    public function setString($string)
+    public function setName($name)
     {
-        $this->string = $string;
+        $this->name = $name;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param mixed $title
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 }
