@@ -1,0 +1,24 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <div class="col-xs-12 form-group">
+        <form action="{{ path('adminChange') }}" method="post">
+            <p class="btn btn-primary btn-sm">Homepage title</p>
+            <input class="form-control" type="text" name="homepageTitle" required="required" value="{{ homepageTitle }}">
+            <p class="btn btn-primary btn-sm">Companies list title</p>
+            <input class="form-control" type="text" name="companyListTitle" required="required" value="{{ companyListTitle }}">
+            {% if companyTitle is defined %}
+                <p class="btn btn-primary btn-sm">Company title</p>
+                <input class="form-control" type="text" name="companyTitle" required="required" value="{{ companyTitle }}">
+                <input class="form-control" type="hidden" name="companyName" required="required" value="{{ companyName }}">
+            {% endif %}
+            {% if productTitle is defined  %}
+                <p class="btn btn-primary btn-sm">Product title</p>
+                <input class="form-control" type="text" name="productTitle" required="required" value="{{ productTitle }}">
+                <input class="form-control" type="hidden" name="productName" required="required" value="{{ productName }}">
+            {% endif %}
+            <br>
+            <button type="submit" class="btn btn-primary send">Save</button>
+        </form>
+    </div>
+{% endblock %}

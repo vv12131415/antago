@@ -1,0 +1,13 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <div class="col-xs-12 form-group">
+        <h2 class="sub-header">Admin page </h2>
+        <p class="btn btn-primary btn-sm">Url</p>
+        <form action="{{ path('adminSearch') }}" method="post">
+            <input class="form-control" type="text" name="string" required="required">
+            <br>
+            <button type="submit" class="btn btn-primary send">Save</button>
+        </form>
+    </div>
+{% endblock %}

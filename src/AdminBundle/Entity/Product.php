@@ -6,7 +6,7 @@
  * Time: 6:42 PM
  */
 
-namespace AppBundle\Entity;
+namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -91,9 +91,9 @@ class Product
     }
 
     /**
-     * @param \AppBundle\Entity\Company $companies
+     * @param \AdminBundle\Entity\Company $companies
      */
-    public function addCompanies(\AppBundle\Entity\Company $companies)
+    public function addCompanies(\AdminBundle\Entity\Company $companies)
     {
         $this->companies[] = $companies;
     }

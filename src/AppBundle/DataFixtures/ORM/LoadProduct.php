@@ -2,7 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Product;
+use AdminBundle\Entity\Product;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -29,6 +29,7 @@ class LoadProduct implements FixtureInterface, ContainerAwareInterface, OrderedF
             'Nokia Lumia',
             'HTC One M8',
             'LG Optimus G',
+
             'Samsung 4K 32 inch',
             'Sony 4K 32 inch',
             'LG 4K 32 inch',

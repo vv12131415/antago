@@ -6,7 +6,7 @@
  * Time: 6:42 PM
  */
 
-namespace AppBundle\Entity;
+namespace AdminBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -38,7 +38,7 @@ class Company
      *
      * @var string
      *
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Product", inversedBy="companies")
+     * @ORM\ManyToMany(targetEntity="AdminBundle\Entity\Product", inversedBy="companies")
      */
     protected $products;
     /**
@@ -94,9 +94,9 @@ class Company
     }
 
     /**
-     * @param \AppBundle\Entity\Product $products
+     * @param \AdminBundle\Entity\Product $products
      */
-    public function addProducts(\AppBundle\Entity\Product $products)
+    public function addProducts(\AdminBundle\Entity\Product $products)
     {
         $this->products[] = $products;
     }

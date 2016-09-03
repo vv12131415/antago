@@ -1,7 +1,8 @@
 <?php
+
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Title;
+use AdminBundle\Entity\Title;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;

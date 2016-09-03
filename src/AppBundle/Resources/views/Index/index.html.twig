@@ -1,9 +1,13 @@
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block title %}
+    {{ title.title }}
+{% endblock %}
+
 {% block body %}
     <div class="col-xs-2">
         <h2 class="sub-header"><a href="/">Home</a></h2>
-        <p type="button" class="btn btn-primary btn-lg btn-block">Companies</p>
+        <a type="button" class="btn btn-primary btn-lg btn-block" href="{{ path('showCompanies') }}">Companies</a>
         {% for company in companies %}
             <a class="btn btn-default btn-lg btn-block" href="companies/{{ company.name }}">{{ company.name }}</a>
         {% endfor %}

@@ -1,12 +1,15 @@
 {% extends 'AppBundle::base.html.twig' %}
 
+{% block title %}
+    {{ title.title }}
+{% endblock %}
+
 {% block body %}
     <div class="col-xs-12">
-        <h2 class="sub-header">Homepage </h2>
-        <a type="button" class="btn btn-primary btn-sm">Product name</a>
+        <h2 class="sub-header">Companies</h2>
         <hr/>
         {% for company in pagination %}
-            <a type="button" class="btn btn-default btn-sm" href="companies/{{ company.name }}">{{ company.name }}</a>
+            <a type="button" class="btn btn-default btn-sm" href="{{ path('showCompanies') }}/{{ company.name }}">{{ company.name }}</a>
             <br>
         {% endfor %}
         <div class="text-center">

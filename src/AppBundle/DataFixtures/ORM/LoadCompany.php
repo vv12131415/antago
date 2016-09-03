@@ -2,7 +2,7 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
-use AppBundle\Entity\Company;
+use AdminBundle\Entity\Company;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -23,13 +23,13 @@ class LoadCompany implements FixtureInterface, ContainerAwareInterface, OrderedF
     {
         $company1 = new Company();
         $company1->setName('Apple');
-        $company1->setTitle('Test title for Apple');
+        $company1->setTitle('The Apple page');
 
         $manager->persist($company1);
 
         $company = new Company();
         $company->setName('Samsung');
-        $company->setTitle('Test title for Samsung');
+        $company->setTitle('The Samsung page');
 
         $manager->persist($company);
 

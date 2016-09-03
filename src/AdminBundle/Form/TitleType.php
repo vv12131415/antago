@@ -6,7 +6,7 @@
  * Time: 7:32 PM
  */
 
-namespace AppBundle\Form;
+namespace AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -35,7 +35,7 @@ class TitleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'        => 'AppBundle\Entity\Title',
+            'data_class'        => 'AdminBundle\Entity\Title',
             'csrf_protection'   => false,
             'allow_extra_fields' => true
         ]);
