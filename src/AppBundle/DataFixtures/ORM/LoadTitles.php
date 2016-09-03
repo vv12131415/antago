@@ -9,7 +9,6 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-
 class LoadTitles implements FixtureInterface, ContainerAwareInterface, OrderedFixtureInterface
 {
     /**
@@ -24,10 +23,10 @@ class LoadTitles implements FixtureInterface, ContainerAwareInterface, OrderedFi
     {
         $pages = [
             'homepage',
-            'companiesList'
+            'companiesList',
         ];
 
-        for ($i = 0; $i < count($pages); $i++) {
+        for ($i = 0; $i < count($pages); ++$i) {
             $title = new Title();
             $title->setName($pages[$i]);
             $manager->persist($title);
@@ -35,7 +34,6 @@ class LoadTitles implements FixtureInterface, ContainerAwareInterface, OrderedFi
 
         $manager->flush();
     }
-
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -47,5 +45,4 @@ class LoadTitles implements FixtureInterface, ContainerAwareInterface, OrderedFi
     {
         return 10;
     }
-
 }

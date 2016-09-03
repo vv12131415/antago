@@ -3,13 +3,11 @@
  * Created by PhpStorm.
  * User: ubuntu
  * Date: 6/6/16
- * Time: 7:32 PM
+ * Time: 7:32 PM.
  */
-
 namespace AdminBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,7 +23,7 @@ class TitleType extends AbstractType
 
         $builder
             ->add('string', TextType::class, [
-                'required'  => true,
+                'required' => true,
             ]);
     }
 
@@ -35,9 +33,9 @@ class TitleType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class'        => 'AdminBundle\Entity\Title',
-            'csrf_protection'   => false,
-            'allow_extra_fields' => true
+            'data_class' => 'AdminBundle\Entity\Title',
+            'csrf_protection' => false,
+            'allow_extra_fields' => true,
         ]);
     }
 

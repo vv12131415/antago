@@ -45,14 +45,14 @@ class LoadProductCompany implements FixtureInterface, ContainerAwareInterface, O
             'Samsung',
         ];
 
-        for ($i = 0; $i < count($apple); $i++) {
+        for ($i = 0; $i < count($apple); ++$i) {
             $company = $manager->getRepository('AdminBundle:Company')->findOneByName($companies[0]);
             $product = $manager->getRepository('AdminBundle:Product')->findOneByName($apple[$i]);
 
             $company->addProducts($product);
         }
 
-        for ($i = 0; $i < count($samsung); $i++) {
+        for ($i = 0; $i < count($samsung); ++$i) {
             $company = $manager->getRepository('AdminBundle:Company')->findOneByName($companies[1]);
             $product = $manager->getRepository('AdminBundle:Product')->findOneByName($samsung[$i]);
 

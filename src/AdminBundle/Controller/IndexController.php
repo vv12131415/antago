@@ -2,13 +2,10 @@
 
 namespace AdminBundle\Controller;
 
-use AdminBundle\Entity\Title;
-use AdminBundle\Form\TitleType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class IndexController extends Controller
 {
@@ -26,7 +23,6 @@ class IndexController extends Controller
      */
     public function SearchAction(Request $request)
     {
-        //TODO:check user input
         $em = $this->getDoctrine()->getManager();
 
         $homepage = $em->getRepository('AdminBundle:Title')->findOneByName('homepage');
@@ -38,7 +34,7 @@ class IndexController extends Controller
         $string = $request->request->get('string');
         $stringArr = parse_url($string);
 
-        if(!array_key_exists('path', $stringArr)){
+        if (!array_key_exists('path', $stringArr)) {
             return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
         }
 
@@ -48,25 +44,26 @@ class IndexController extends Controller
         foreach ($path as $key => $value) {
             if (empty($value)) {
                 unset($path[$key]);
-            }}
+            }
+        }
 
-        if(empty($path)){
+        if (empty($path)) {
             return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
         }
-        if('companies' == $path[1] && empty($path[2])){
+        if ('companies' == $path[1] && empty($path[2])) {
             return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
         }
 
         $companyName = $path[2];
         $company = $em->getRepository('AdminBundle:Company')->findOneByName($companyName);
 
-        if(!$company){
+        if (!$company) {
             return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
         }
 
         $companyTitle = $company->getTitle();
 
-        if(!array_key_exists('query', $stringArr)) {
+        if (!array_key_exists('query', $stringArr)) {
             return $this->render('AdminBundle:Index:search.html.twig', [
                 'homepageTitle' => $homepageTitle,
                 'companyListTitle' => $companiesListTitle,
@@ -74,7 +71,6 @@ class IndexController extends Controller
                 'companyTitle' => $companyTitle,
             ]);
         }
-        //TODO: don't forget to persist and push
 
         $query = $stringArr['query'];
         $query = explode('=', $query);
@@ -83,7 +79,7 @@ class IndexController extends Controller
         $product = $em->getRepository('AdminBundle:Product')->find($productId);
         $productName = $product->getName();
 
-        if(!$product){
+        if (!$product) {
             return $this->somethingWentWrong($homepageTitle, $companiesListTitle);
         }
 
@@ -97,9 +93,6 @@ class IndexController extends Controller
             'productName' => $productName,
             'productTitle' => $productTitle,
         ]);
-
-
-
     }
 
     protected function somethingWentWrong($homepageTitle, $companiesListTitle)
@@ -122,18 +115,18 @@ class IndexController extends Controller
     public function changeAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        
+
         $homepageTitle = $request->request->get('homepageTitle');
         $homepage = $em->getRepository('AdminBundle:Title')->findOneByName('homepage');
         $homepage->setTitle($homepageTitle);
         $em->persist($homepage);
-        
+
         $companyListTitle = $request->request->get('companyListTitle');
         $companyList = $em->getRepository('AdminBundle:Title')->findOneByName('companiesList');
         $companyList->setTitle($companyListTitle);
         $em->persist($companyList);
 
-        if($request->request->get('companyTitle')){
+        if ($request->request->get('companyTitle')) {
             $companyTitle = $request->request->get('companyTitle');
             $companyName = $request->request->get('companyName');
             $company = $em->getRepository('AdminBundle:Company')->findOneByName($companyName);
@@ -141,14 +134,13 @@ class IndexController extends Controller
             $em->persist($company);
         }
 
-        if($request->request->get('productTitle')){
+        if ($request->request->get('productTitle')) {
             $productTitle = $request->request->get('productTitle');
             $productName = $request->request->get('productName');
             $product = $em->getRepository('AdminBundle:Product')->findOneByName($productName);
             $product->setTitle($productTitle);
             $em->persist($product);
         }
-
 
         $em->flush();
 

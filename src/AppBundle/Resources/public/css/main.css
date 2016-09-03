@@ -17,17 +17,3 @@ p.btn.btn-sm {
 a.btn.btn-sm {
     width: 100%;
 }
-
-div.flash-warning {
-    width: 100%;
-    text-align: center;
-    line-height: 40px;
-    padding-right: 15px;
-    padding-left: 15px;
-}
-
-div.flash-warning  p {
-    width: 100%;
-    margin: 0;
-    background: rgba(254, 117, 110, 0.84);
-}

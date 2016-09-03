@@ -17,7 +17,7 @@ p.btn.btn-sm {
 a.btn.btn-sm {
     width: 100%;
 }
-
+/*div*/
 div.flash-warning {
     width: 100%;
     text-align: center;
@@ -26,8 +26,9 @@ div.flash-warning {
     padding-left: 15px;
 }
 
-div.flash-warning  p {
+div.flash-warning p {
     width: 100%;
     margin: 0;
     background: rgba(254, 117, 110, 0.84);
 }
+/*/div*/

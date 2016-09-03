@@ -3,15 +3,12 @@
  * Created by PhpStorm.
  * User: ubuntu
  * Date: 8/15/16
- * Time: 6:42 PM
+ * Time: 6:42 PM.
  */
-
 namespace AdminBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
@@ -27,7 +24,6 @@ class Product
     protected $id;
 
     /**
-     *
      * @var string
      *
      * @ORM\Column(name="name", type="text", length=255, nullable=false)
@@ -113,5 +109,4 @@ class Product
     {
         $this->title = $title;
     }
-
 }

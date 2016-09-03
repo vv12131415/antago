@@ -3,15 +3,12 @@
  * Created by PhpStorm.
  * User: ubuntu
  * Date: 8/15/16
- * Time: 6:42 PM
+ * Time: 6:42 PM.
  */
-
 namespace AdminBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * @ORM\Entity
@@ -27,7 +24,6 @@ class Company
     protected $id;
 
     /**
-     *
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, unique=true)
@@ -35,7 +31,6 @@ class Company
     protected $name;
 
     /**
-     *
      * @var string
      *
      * @ORM\ManyToMany(targetEntity="AdminBundle\Entity\Product", inversedBy="companies")
@@ -116,6 +111,4 @@ class Company
     {
         $this->title = $title;
     }
-
-
 }

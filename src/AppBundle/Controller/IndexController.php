@@ -3,12 +3,9 @@
 namespace AppBundle\Controller;
 
 use AdminBundle\Entity\Title;
-use AdminBundle\Form\TitleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 class IndexController extends Controller
 {
@@ -73,9 +70,7 @@ class IndexController extends Controller
         $em = $this->getDoctrine()->getManager();
         $companies = $em->getRepository('AdminBundle:Company')->findAll();
 
-        if (null == $productId){
-
-
+        if (null == $productId) {
             $dql = "SELECT p FROM AdminBundle:Product p JOIN p.companies c WHERE c.name = '$company_name'";
             $query = $em->createQuery($dql);
 

@@ -3,15 +3,15 @@
  * Created by PhpStorm.
  * User: ubuntu
  * Date: 4/28/16
- * Time: 1:33 PM
+ * Time: 1:33 PM.
  */
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @ORM\Entity
  * @ORM\Table(name="title")
- *
  */
 class Title
 {
@@ -22,13 +22,11 @@ class Title
      */
     protected $id;
     /**
-     *
      * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
 
     /**
-     *
      * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title = 'Welcome!';
@@ -40,6 +38,7 @@ class Title
     {
         return $this->id;
     }
+
     /**
      * @param mixed $id
      */
