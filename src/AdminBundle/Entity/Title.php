@@ -27,9 +27,9 @@ class Title
     protected $name;
 
     /**
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
-    protected $title = 'Welcome!';
+    protected $title;
 
     /**
      * @return mixed

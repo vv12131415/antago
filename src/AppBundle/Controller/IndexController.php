@@ -2,7 +2,6 @@
 
 namespace AppBundle\Controller;
 
-use AdminBundle\Entity\Title;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,7 +15,9 @@ class IndexController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $companies = $em->getRepository('AdminBundle:Company')->findAll();
-        $title = $em->getRepository('AdminBundle:Title')->findOneByName('homepage');
+        $homepage = $em->getRepository('AdminBundle:Title')->findOneByName('homepage');
+
+        $title = $homepage->getTitle();
 
         $dql = 'SELECT p FROM AdminBundle:Product p';
         $query = $em->createQuery($dql);
@@ -42,7 +43,20 @@ class IndexController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $title = $em->getRepository('AdminBundle:Title')->findOneByName('companiesList');
+        $homepage = $em->getRepository('AdminBundle:Title')->findOneByName('homepage');
+        $homepageTitle = $homepage->getTitle();
+
+        if (!empty($homepageTitle)) {
+            $title = $homepageTitle;
+        }
+
+        $companiesList = $em->getRepository('AdminBundle:Title')->findOneByName('companiesList');
+
+        $companiesListTitle = $companiesList->getTitle();
+
+        if (!empty($companiesListTitle)) {
+            $title = $companiesListTitle;
+        }
 
         $dql = 'SELECT c FROM AdminBundle:Company c';
         $query = $em->createQuery($dql);
@@ -68,7 +82,30 @@ class IndexController extends Controller
         $productId = $request->query->get('product');
 
         $em = $this->getDoctrine()->getManager();
-        $companies = $em->getRepository('AdminBundle:Company')->findAll();
+        $companiesAll = $em->getRepository('AdminBundle:Company')->findAll();
+
+        $homepage = $em->getRepository('AdminBundle:Title')->findOneByName('homepage');
+        $homepageTitle = $homepage->getTitle();
+
+        if (!empty($homepageTitle)) {
+            $title = $homepageTitle;
+        }
+
+        $companiesList = $em->getRepository('AdminBundle:Title')->findOneByName('companiesList');
+
+        $companiesListTitle = $companiesList->getTitle();
+
+        if (!empty($companiesListTitle)) {
+            $title = $companiesListTitle;
+        }
+
+        $company = $em->getRepository('AdminBundle:Company')->findOneByName($company_name);
+
+        $companyTitle = $company->getTitle();
+
+        if (!empty($companyTitle)) {
+            $title = $companyTitle;
+        }
 
         if (null == $productId) {
             $dql = "SELECT p FROM AdminBundle:Product p JOIN p.companies c WHERE c.name = '$company_name'";
@@ -81,6 +118,13 @@ class IndexController extends Controller
                 5
             );
         } else {
+            $product = $em->getRepository('AdminBundle:Product')->find($productId);
+            $productTitle = $product->getTitle();
+
+            if (!empty($productTitle)) {
+                $title = $productTitle;
+            }
+
             $dql = "SELECT p FROM AdminBundle:Product p JOIN p.companies c WHERE c.name = '$company_name' AND p.id = '$productId'";
             $query = $em->createQuery($dql);
 
@@ -92,12 +136,11 @@ class IndexController extends Controller
             );
         }
 
-        //var_dump($pagination[1]);die();
-
         return $this->render('AppBundle:Index:company.html.twig', [
-            'companies' => $companies,
+            'companies' => $companiesAll,
             'company_name' => $company_name,
             'pagination' => $pagination,
+            'title' => $title,
         ]);
     }
 }

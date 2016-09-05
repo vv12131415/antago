@@ -21,7 +21,7 @@ class IndexController extends Controller
      * @Route("/admin/search", name="adminSearch")
      * @Method({"POST"})
      */
-    public function SearchAction(Request $request)
+    public function searchAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
