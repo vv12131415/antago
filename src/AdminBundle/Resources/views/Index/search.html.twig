@@ -4,18 +4,18 @@
     <div class="col-xs-12 form-group">
         <form action="{{ path('adminChange') }}" method="post">
             <p class="btn btn-primary btn-sm">Homepage title</p>
-            <input class="form-control" type="text" name="homepageTitle" required="required" value="{{ homepageTitle }}">
+            <input class="form-control" type="text" name="homepageTitle" value="{{ homepageTitle }}">
             <p class="btn btn-primary btn-sm">Companies list title</p>
-            <input class="form-control" type="text" name="companyListTitle" required="required" value="{{ companyListTitle }}">
+            <input class="form-control" type="text" name="companyListTitle" value="{{ companyListTitle }}">
             {% if companyTitle is defined %}
                 <p class="btn btn-primary btn-sm">Company title</p>
-                <input class="form-control" type="text" name="companyTitle" required="required" value="{{ companyTitle }}">
-                <input class="form-control" type="hidden" name="companyName" required="required" value="{{ companyName }}">
+                <input class="form-control" type="text" name="companyTitle" value="{{ companyTitle }}">
+                <input class="form-control" type="hidden" name="companyName" value="{{ companyName }}">
             {% endif %}
             {% if productTitle is defined  %}
                 <p class="btn btn-primary btn-sm">Product title</p>
-                <input class="form-control" type="text" name="productTitle" required="required" value="{{ productTitle }}">
-                <input class="form-control" type="hidden" name="productName" required="required" value="{{ productName }}">
+                <input class="form-control" type="text" name="productTitle" value="{{ productTitle }}">
+                <input class="form-control" type="hidden" name="productName" value="{{ productName }}">
             {% endif %}
             <br>
             <button type="submit" class="btn btn-primary send">Save</button>

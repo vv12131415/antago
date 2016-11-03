@@ -1,19 +1,5 @@
 {% extends 'AppBundle::base.html.twig' %}
 
-{% block title %}
-    {% if pagination[1] is defined %}
-        {% for company in companies %}
-            {% if company.name == company_name %}
-                {{ company.title }}
-            {% endif %}
-        {% endfor %}
-    {% else %}
-        {% for product in pagination %}
-            {{ product.title }}
-        {% endfor %}
-    {% endif %}
-{% endblock %}
-
 {% block body %}
     <div class="col-xs-2">
         <h2 class="sub-header"><a href="/">Home</a></h2>
